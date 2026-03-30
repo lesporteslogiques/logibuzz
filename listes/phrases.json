@@ -1,0 +1,30 @@
+{
+    "0": {
+        "phrase": "Fais-le, ou ne le fais pas, mais il n'y a pas d'essai. (Star Wars)",
+        "reponse": true
+    },
+    "1": {
+        "phrase": "Tu veux ma photo, courgette ? (Retour vers le futur)",
+        "reponse": false
+    },
+    "2": {
+        "phrase": "Un grand pouvoir implique de grandes responsabilités (Spider-Man)",
+        "reponse": true
+    },
+    "3": {
+        "phrase": "Sarah Connor ? - C'est à côté. (Terminator)",
+        "reponse": false
+    },
+    "4": {
+        "phrase": "Ce n'est pas gentil d'être méchant !",
+        "reponse": true
+    },
+    "5": {
+        "phrase": "Au passage à l'heure d'été, nous avançons d'une heure.",
+        "reponse": true
+    },
+    "6": {
+        "phrase": "Oh oh, alerte, Stacy à 10h... (Wayne's World)",
+        "reponse": true
+    }
+}

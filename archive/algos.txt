@@ -1,0 +1,37 @@
+caractère fonction scinderTexte(caractere[] texte, entier taille)
+# Cet algorithme n'est pas à jour et ne correspond plus à ce qui a été codé
+
+caractère[] ligneTexte;
+entier espace1, espace2, position1, position2, numLigne;
+
+Début scinderTexte
+    position1 <- 0;
+    position2 <- 0;
+    numLigne <- 1;
+
+    Si longueur(texte) > taille
+      Alors
+        ligneTexte[0] <- texte;
+
+        Tant que longueur(ligneTexte[numLigne - 1]) > taille itérer
+            espace1 <- 0;
+            espace2 <- 0;
+
+            Tant que espace2 ≤ taille itérer
+                espace2 <- trouverEspace(ligneTexte, espace1);
+
+                Si espace2 ≤ taille
+                  Alors
+                    espace1 <- espace2;
+                Fsi
+            Ftantque
+
+            position2 <- position2 + espace1;
+            ligneTexte[numLigne] <- ligneTexte[0][position1 : position2];
+            numLigne <- numLigne + 1;
+            position1 <- position1 + espace1;
+        Ftantque
+
+        retourner ligneTexte;
+    Fsi
+Fin scinderTexte

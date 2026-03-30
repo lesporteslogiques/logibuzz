@@ -1,0 +1,50 @@
+{
+    "0" : {
+        "question" : "Quelle est la couleur du cheval blanc d'Henri IV ?",
+        "1" : "Bleu",
+        "2" : "Vert",
+        "3" : "Blanc",
+        "4" : "Rouge",
+        "reponse" : 3
+    },
+    "1" : {
+        "question" : "Quelle est la réponse à la grande question sur la vie, l'univers et tout le reste ?",
+        "1" : "La mer Noire",
+        "2" : "42",
+        "3" : "Obi-Wan Kenobi",
+        "4" : "La réponse D",
+        "reponse" : 2
+    },
+    "2" : {
+        "question" : "En France, de quel côté de la route devons-nous conduire ?",
+        "1" : "Gauche",
+        "2" : "Droit",
+        "3" : null,
+        "4" : null,
+        "reponse" : 2
+    },
+    "3" : {
+        "question" : "Qu'est-ce qui l'emporte sur les ciseaux ?",
+        "1" : "La pierre",
+        "2" : "La feuille",
+        "3" : "Le ciseaux",
+        "4" : null,
+        "reponse" : 1
+    },
+    "4" : {
+        "question" : "Le jour de Noël, c'est...",
+        "1" : "Le 30 Février",
+        "2" : "Le 15 Août",
+        "3" : "Le 1er Novembre",
+        "4" : "Le 25 Décembre",
+        "reponse" : 4
+    },
+    "5" : {
+        "question" : "Le meilleur ami de l'homme, c'est...",
+        "1" : "Le chat",
+        "2" : "L'écureuil",
+        "3" : "Le capybara",
+        "4" : "Le chien",
+        "reponse" : 4
+    }
+}
