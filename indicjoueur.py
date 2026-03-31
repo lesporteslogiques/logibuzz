@@ -24,6 +24,16 @@ class IndicJoueur:
         self.vecteurX = 0
         self.vecteurY = 0
         self.timer = pygame.time.Clock()
+        self.listeAvatar = [
+            pygame.image.load("placeholder-avatar1.webp"),
+            pygame.image.load("placeholder-avatar2.webp"),
+            pygame.image.load("placeholder-avatar3.webp"),
+            pygame.image.load("placeholder-avatar4.webp")
+        ]
+        self.numAvatar = 0
+        self.avatar = self.listeAvatar[self.numero - 1]
+        self.avatarSuivant = False
+        self.avatarPrecedent = False
     
 
     def getNumero(self):
@@ -124,3 +134,40 @@ class IndicJoueur:
         self.vecteurX = 0
         self.vecteurY = 0
         self.pos = pygame.Vector2(self.ecran.get_width() * resetX, self.ecran.get_height() * resetY)
+    
+
+    def getAvatar(self):
+        return self.avatar
+    
+
+    def getNumAvatar(self):
+        return self.numAvatar
+    
+
+    def changerAvatar(self, nvAvatar):
+        self.numAvatar += nvAvatar
+        if self.numAvatar >= len(self.listeAvatar):
+            self.numAvatar = 0
+        elif self.numAvatar < 0:
+            self.numAvatar = len(self.listeAvatar) - 1
+        self.avatar = self.listeAvatar[self.numAvatar]
+    
+
+    def getAvatarSuiv(self) -> bool:
+        return self.avatarSuivant
+    
+
+    def getAvatarPrec(self) -> bool:
+        return self.avatarPrecedent
+    
+
+    def setAvatarSuiv(self, valeur: bool):
+        self.avatarSuivant = valeur
+    
+
+    def setAvatarPrec(self, valeur: bool):
+        self.avatarPrecedent = valeur
+    
+
+    def majAvatar(self, avatX: int = 0, avatY: int = 0):
+        self.ecran.blit(self.avatar, (self.pos.x + avatX, self.pos.y + avatY))

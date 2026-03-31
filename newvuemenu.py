@@ -22,6 +22,9 @@ class VueMenu:
         ]
         self.choix = 0
         self.nbJoueurs = 0
+        self.fondEcran = pygame.image.load("placeholder-fond.png")
+        
+        
 
     
     def resetCouleursModes(self):
@@ -31,6 +34,7 @@ class VueMenu:
 
     def bouclePrincipale(self, largeur, hauteur, events):
         self.controleur.ecran.fill("black")
+        self.controleur.ecran.blit(self.fondEcran, (0,0))
         annexe.texteStatique(self.controleur.ecran, "LogiBuzz", 44, "white", self.controleur.ecran.get_width() * 0.5, self.controleur.ecran.get_height() * 0.2)
         for i in range(0, len(self.modes)):
             self.modes[i].majTexte()
@@ -95,6 +99,26 @@ class VueMenu:
                             self.indicateur[i].setBuzzer(False)
                         self.indicateur[i].majCercle()
                         self.indicateur[i].majTexte(0, 40)
+
+                        bAvatSuiv = buzzer.get_button(4 + (5*i))
+                        bAvatPrec = buzzer.get_button(3 + (5*i))
+
+                        if self.indicateur[i].getValider():
+                            # Avatar suivant
+                            if bAvatSuiv and not self.indicateur[i].getAvatarSuiv():
+                                self.indicateur[i].setAvatarSuiv(True)
+                                self.indicateur[i].changerAvatar(+1)
+                            if not bAvatSuiv and self.indicateur[i].getAvatarSuiv():
+                                self.indicateur[i].setAvatarSuiv(False)
+                            # Avatar précédent
+                            if bAvatPrec and not self.indicateur[i].getAvatarPrec():
+                                self.indicateur[i].setAvatarPrec(True)
+                                self.indicateur[i].changerAvatar(+1)
+                            if not bAvatPrec and self.indicateur[i].getAvatarPrec():
+                                self.indicateur[i].setAvatarPrec(False)
+                            # MaJ de l'avatar
+                            self.indicateur[i].majAvatar()
+
                     decompte -= timer.tick(60) / 1000
                     pygame.display.flip()
                     # Fin de la boucle

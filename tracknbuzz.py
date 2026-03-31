@@ -60,10 +60,20 @@ class TrackNBuzz:
                 punch = random.choice(self.punchline)
                 self.quiGagne(i, punch)
                 break
-            if self.buzzer.get_button(0+(5 * (self.joueur[i].getNumero() - 1))) and not self.joueur[i].getBuzzer():
+            if (
+                self.buzzer.get_button(0+(5 * (self.joueur[i].getNumero() - 1))) 
+                or self.buzzer.get_button(1+(5 * (self.joueur[i].getNumero() - 1)))
+                or self.buzzer.get_button(2+(5 * (self.joueur[i].getNumero() - 1)))
+                or self.buzzer.get_button(3+(5 * (self.joueur[i].getNumero() - 1)))
+                or self.buzzer.get_button(4+(5 * (self.joueur[i].getNumero() - 1))) ) and not self.joueur[i].getBuzzer():
                 self.joueur[i].setBuzzer(True)
                 self.joueur[i].ajoutInertie(0.45,0)
-            if not self.buzzer.get_button(0+(5 * (self.joueur[i].getNumero() - 1))) and self.joueur[i].getBuzzer():
+            if not (
+                self.buzzer.get_button(0+(5 * (self.joueur[i].getNumero() - 1))) 
+                or self.buzzer.get_button(1+(5 * (self.joueur[i].getNumero() - 1)))
+                or self.buzzer.get_button(2+(5 * (self.joueur[i].getNumero() - 1)))
+                or self.buzzer.get_button(3+(5 * (self.joueur[i].getNumero() - 1)))
+                or self.buzzer.get_button(4+(5 * (self.joueur[i].getNumero() - 1))) ) and self.joueur[i].getBuzzer():
                 self.joueur[i].setBuzzer(False)
             self.joueur[i].majPosition()
             self.joueur[i].majCercle(0,0)
