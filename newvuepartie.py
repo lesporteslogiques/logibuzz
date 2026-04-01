@@ -2,7 +2,7 @@ import pygame, random, annexe, json
 from indicjoueur import IndicJoueur
 
 class VuePartie:
-    def __init__(self, controleur, questions, nbJoueurs):
+    def __init__(self, controleur, questions, nbJoueurs, avatarChoisi):
         self.controleur = controleur
         self.questions = questions
         print("Vue Partie, mk2")
@@ -19,6 +19,7 @@ class VuePartie:
                 IndicJoueur(nbJoueurs[i], self.controleur.ecran, (1 / (len(nbJoueurs) + 1)) + ((1/ (len(nbJoueurs) + 1)) * i), 0.85)
             )
             self.joueur[i].setCouleurCercleJoueur()
+            self.joueur[i].setAvatar(avatarChoisi[i])
         # self.joueur = [
         #     IndicJoueur(1, self.controleur.ecran, 0.2, 0.85),
         #     IndicJoueur(2, self.controleur.ecran, 0.4, 0.85),
@@ -167,6 +168,7 @@ class VuePartie:
         
         for j in range(0, len(self.joueur)):
             self.joueur[j].majCercle()
+            self.joueur[j].majAvatar()
         self.majTimer()
         self.majReponse()
         self.setReponse()

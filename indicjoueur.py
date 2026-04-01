@@ -144,6 +144,10 @@ class IndicJoueur:
         return self.numAvatar
     
 
+    def setAvatar(self, avatarChoisi):
+        self.avatar = self.listeAvatar[avatarChoisi]
+    
+
     def changerAvatar(self, nvAvatar):
         self.numAvatar += nvAvatar
         if self.numAvatar >= len(self.listeAvatar):
@@ -170,4 +174,6 @@ class IndicJoueur:
     
 
     def majAvatar(self, avatX: int = 0, avatY: int = 0):
-        self.ecran.blit(self.avatar, (self.pos.x + avatX, self.pos.y + avatY))
+        centreX = self.pos.x - (self.avatar.get_width() // 2)
+        centreY = self.pos.y - (self.avatar.get_height() // 2)
+        self.ecran.blit(self.avatar, (centreX + avatX, centreY + avatY))

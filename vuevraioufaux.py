@@ -2,7 +2,7 @@ import pygame, random, annexe, json
 from indicjoueur import IndicJoueur
 
 class VueVraiOuFaux:
-    def __init__(self, controleur, phrases, vousEtesCombien):
+    def __init__(self, controleur, phrases, vousEtesCombien, photoDeProfil):
         self.controleur = controleur
         self.phrases = phrases
         self.combienDeJ = len(vousEtesCombien)
@@ -23,6 +23,7 @@ class VueVraiOuFaux:
                 IndicJoueur(vousEtesCombien[j], self.controleur.ecran, (1 / (self.combienDeJ + 1)) + ((1 / (self.combienDeJ + 1)) * j), 0.85)
             )
             self.joueur[j].setCouleurCercleJoueur()
+            self.joueur[j].setAvatar(photoDeProfil[j])
         self.phrase = ""
         self.bonneReponse = ""
         
@@ -56,7 +57,7 @@ class VueVraiOuFaux:
         for i in range(0,self.combienDeJ):
             self.joueur[i].setCouleurTexte(pygame.Color("white"))
             self.joueur[i].setValider(False)
-            self.joueur[i].setTexte("?")
+            self.joueur[i].setTexte("")
         
         element = []
         for num in self.listePhrase:
@@ -84,12 +85,13 @@ class VueVraiOuFaux:
                 if self.buzzer.get_button(4 + (5 * (self.joueur[j].getNumero() - 1))) and not self.joueur[j].getValider():
                     self.joueur[j].setValider(True)
                     self.joueur[j].setValeur(True)
-                    self.joueur[j].setTexte("Vrai")
                 elif self.buzzer.get_button( 3 + (5 * (self.joueur[j].getNumero() - 1))) and not self.joueur[j].getValider():
                     self.joueur[j].setValider(True)
                     self.joueur[j].setValeur(False)
-                    self.joueur[j].setTexte("Faux")
+                if self.joueur[j].getValider():
+                    self.joueur[j].setTexte("?")
             self.joueur[j].majTexte(0,40)
+            self.joueur[j].majAvatar()
 
         if aChoisi or self.temps <= 0:
             self.vraieReponse()
@@ -120,6 +122,8 @@ class VueVraiOuFaux:
                 self.joueur[i].setCouleurTexte(pygame.Color("red"))
         
             self.joueur[i].majTexte(0,40)
+            # Note : MaJ de l'avatar avec la tête de victoire
+            self.joueur[i].majAvatar()
         pygame.display.flip()
         self.delaiTemps(1.5)
         self.couleurDecompte = "white"

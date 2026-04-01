@@ -113,7 +113,7 @@ class VueMenu:
                             # Avatar précédent
                             if bAvatPrec and not self.indicateur[i].getAvatarPrec():
                                 self.indicateur[i].setAvatarPrec(True)
-                                self.indicateur[i].changerAvatar(+1)
+                                self.indicateur[i].changerAvatar(-1)
                             if not bAvatPrec and self.indicateur[i].getAvatarPrec():
                                 self.indicateur[i].setAvatarPrec(False)
                             # MaJ de l'avatar
@@ -123,17 +123,18 @@ class VueMenu:
                     pygame.display.flip()
                     # Fin de la boucle
                 numero = []
+                numeroAvatar = []
                 for i in range(0,4):
                     if self.indicateur[i].getValider():
                         numero.append(self.indicateur[i].getNumero())
-                        # Il faudra adapter les autres vues pour prendre en compte le numéro des joueurs présents
+                        numeroAvatar.append(self.indicateur[i].getNumAvatar())
 
                         
                 match self.choix:
                     case 1:
-                        self.modes[0].changerVue(self.controleur, numero)
+                        self.modes[0].changerVue(self.controleur, numero, numeroAvatar)
                     case 2:
-                        self.modes[1].changerVue(self.controleur, numero)
+                        self.modes[1].changerVue(self.controleur, numero, numeroAvatar)
                     case 3:
-                        self.modes[2].changerVue(self.controleur, numero)
+                        self.modes[2].changerVue(self.controleur, numero, numeroAvatar)
         

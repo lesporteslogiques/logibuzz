@@ -18,17 +18,17 @@ class Controleur:
     def getVue(self):
         return self.vue
 
-    def setVue(self, nvVue, controleur, nombreJoueurs: int = 4):
+    def setVue(self, nvVue, controleur, nombreJoueurs: int = 4, quelAvatar: int = 0):
         controleur.ecran.fill("black")
         match nvVue:
             case 0:
                 self.vue = VueMenu(controleur)
             case 1:
-                self.vue = VuePartie(controleur, self.questions, nombreJoueurs)
+                self.vue = VuePartie(controleur, self.questions, nombreJoueurs, quelAvatar)
             case 2:
-                self.vue = VueVraiOuFaux(controleur, self.phrases, nombreJoueurs)
+                self.vue = VueVraiOuFaux(controleur, self.phrases, nombreJoueurs, quelAvatar)
             case 3:
-                self.vue = TrackNBuzz(controleur, nombreJoueurs)
+                self.vue = TrackNBuzz(controleur, nombreJoueurs, quelAvatar)
             case 4:
                 self.vue = Inertie(controleur)
             case 5:

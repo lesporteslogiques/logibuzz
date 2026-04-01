@@ -2,7 +2,7 @@ import pygame, annexe, random
 from indicjoueur import IndicJoueur
 
 class TrackNBuzz:
-    def __init__(self, controleur, nbJoueurs):
+    def __init__(self, controleur, nbJoueurs, quelleTete):
         self.controleur = controleur
         self.nbJoueurs = len(nbJoueurs)
         print("Vue Track & Buzz")
@@ -26,13 +26,15 @@ class TrackNBuzz:
         for i in range(0,len(nbJoueurs)):
             self.joueur.append(IndicJoueur(nbJoueurs[i], self.controleur.ecran, 0.05, 0.25 + (0.20 * i)))
             self.joueur[i].setCouleurCercleJoueur()
+            self.joueur[i].setAvatar(quelleTete[i])
         self.controleur.ecran.fill("black")
         annexe.delaiTemps(1)
     
 
     def majJoueurs(self):
         for i in range(0,self.nbJoueurs):
-            self.joueur[i].majCercle(0,0)
+            self.joueur[i].majCercle()
+            self.joueur[i].majAvatar()
 
 
     def quiGagne(self, gagnant: int, phrase: str):
@@ -76,7 +78,8 @@ class TrackNBuzz:
                 or self.buzzer.get_button(4+(5 * (self.joueur[i].getNumero() - 1))) ) and self.joueur[i].getBuzzer():
                 self.joueur[i].setBuzzer(False)
             self.joueur[i].majPosition()
-            self.joueur[i].majCercle(0,0)
+            self.joueur[i].majCercle()
+            self.joueur[i].majAvatar()
         
         clavier = pygame.key.get_pressed()
         if clavier[pygame.K_ESCAPE]:
