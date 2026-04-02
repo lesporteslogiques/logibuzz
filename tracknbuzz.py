@@ -8,6 +8,7 @@ class TrackNBuzz:
         print("Vue Track & Buzz")
         # self.timer = pygame.time.Clock()
         self.temps = 0
+        self.fond = pygame.image.load("images/placeholder-fond.png")
         self.buzzer = pygame.joystick.Joystick(0)
         self.punchline = [
             "Trop rapide pour vous !",
@@ -24,9 +25,8 @@ class TrackNBuzz:
         ]
         self.joueur = []
         for i in range(0,len(nbJoueurs)):
-            self.joueur.append(IndicJoueur(nbJoueurs[i], self.controleur.ecran, 0.05, 0.25 + (0.20 * i)))
+            self.joueur.append(IndicJoueur(nbJoueurs[i], self.controleur.ecran, 0.05, 0.25 + (0.20 * i), quelleTete[i]))
             self.joueur[i].setCouleurCercleJoueur()
-            self.joueur[i].setAvatar(quelleTete[i])
         self.controleur.ecran.fill("black")
         annexe.delaiTemps(1)
     
@@ -41,12 +41,15 @@ class TrackNBuzz:
         numJoueur = self.joueur[gagnant].getNumero()
         texteVictoire = "Le joueur " + str(numJoueur) + " gagne la course !"
         decompte = 7
+        self.joueur[gagnant].setScore(+1)
         self.joueur[gagnant].setValeur(phrase)
         while decompte >= 1:
             self.controleur.ecran.fill("black")
+            self.controleur.ecran.blit(self.fond, (0,0))
             annexe.texteStatique(self.controleur.ecran, texteVictoire, 44, "white", (self.controleur.ecran.get_width() // 2), (self.controleur.ecran.get_height() * 0.1))
             self.majJoueurs()
             self.joueur[gagnant].majTexteGauche()
+            self.joueur[gagnant].majScore(-80, 40)
             if decompte <= 5:
                 annexe.texteStatique(self.controleur.ecran, "On repart dans " + str(decompte) + " secondes...", 34, "white", (self.controleur.ecran.get_width() // 2), (self.controleur.ecran.get_height() * 0.18))
             pygame.display.flip()
@@ -84,9 +87,17 @@ class TrackNBuzz:
         clavier = pygame.key.get_pressed()
         if clavier[pygame.K_ESCAPE]:
             print("Retour au menu, fini de martyriser les buzzers !")
-            self.controleur.setVue(0, self.controleur)
+            numeroJoueur = []
+            avatarJoueur = []
+            scoreJoueur = []
+            for j in range(0,len(self.joueur)):
+                numeroJoueur.append(self.joueur[j].getNumero())
+                avatarJoueur.append(self.joueur[j].getAvatarChoisi())
+                scoreJoueur.append(self.joueur[j].getScore())
+            self.controleur.setVue(0, self.controleur, numeroJoueur, avatarJoueur, scoreJoueur, True)
     
 
     def bouclePrincipale(self, largeur, hauteur, events):
         self.controleur.ecran.fill("black")
+        self.controleur.ecran.blit(self.fond, (0,0))
         self.quiAvance()

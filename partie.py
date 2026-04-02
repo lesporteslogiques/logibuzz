@@ -16,10 +16,10 @@ class VuePartie:
         self.joueur = []
         for i in range(0,len(nbJoueurs)):
             self.joueur.append(
-                IndicJoueur(nbJoueurs[i], self.controleur.ecran, (1 / (len(nbJoueurs) + 1)) + ((1/ (len(nbJoueurs) + 1)) * i), 0.85)
+                IndicJoueur(nbJoueurs[i], self.controleur.ecran, (1 / (len(nbJoueurs) + 1)) + ((1/ (len(nbJoueurs) + 1)) * i), 0.85, avatarChoisi[i])
             )
             self.joueur[i].setCouleurCercleJoueur()
-            self.joueur[i].setAvatar(avatarChoisi[i])
+            # self.joueur[i].setAvatar(avatarChoisi[i])
         # self.joueur = [
         #     IndicJoueur(1, self.controleur.ecran, 0.2, 0.85),
         #     IndicJoueur(2, self.controleur.ecran, 0.4, 0.85),
@@ -99,7 +99,7 @@ class VuePartie:
                                 self.joueur[i].setValeur(4)
                                 self.joueur[i].setTexte("?")
                                 self.joueur[i].setValider(True)
-            self.joueur[i].majTexte(0,40)
+            self.joueur[i].majTexte(0,-80)
 
         for i in range(0, len(self.joueur)):
             if not self.joueur[i].getValider():
@@ -110,7 +110,14 @@ class VuePartie:
         touche = pygame.key.get_pressed()
         if touche[pygame.K_ESCAPE]:
             print("Retour au menu !")
-            self.controleur.setVue(0, self.controleur)
+            numeroJoueur = []
+            avatarJoueur = []
+            scoreJoueur = []
+            for j in range(0,len(self.joueur)):
+                numeroJoueur.append(self.joueur[j].getNumero())
+                avatarJoueur.append(self.joueur[j].getAvatarChoisi())
+                scoreJoueur.append(self.joueur[j].getScore())
+            self.controleur.setVue(0, self.controleur, numeroJoueur, avatarJoueur, scoreJoueur, True)
     
 
     def majReponse(self):
@@ -137,10 +144,11 @@ class VuePartie:
             if self.joueur[i].getValeur() == (self.bonneReponse + 1):
                 self.joueur[i].setValeur("Correct")
                 self.joueur[i].setCouleurTexte("green")
+                self.joueur[i].setScore(+1)
             else:
                 self.joueur[i].setValeur("Incorrect")
                 self.joueur[i].setCouleurTexte("red")
-            self.joueur[i].majTexte(0,40)
+            self.joueur[i].majTexte(0,-80)
                 
             # if self.joueur[i].getCouleurCercle() != "black":
             #     if self.joueur[i].getValeur == (self.bonneReponse + 1):
@@ -169,6 +177,7 @@ class VuePartie:
         for j in range(0, len(self.joueur)):
             self.joueur[j].majCercle()
             self.joueur[j].majAvatar()
+            self.joueur[j].majScore(0, 40)
         self.majTimer()
         self.majReponse()
         self.setReponse()

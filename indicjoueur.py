@@ -1,7 +1,7 @@
 import pygame
 
 class IndicJoueur:
-    def __init__(self, numero, ecran, x, y):
+    def __init__(self, numero, ecran, x, y, avatar, score: int = 0, menu: bool = False):
         self.ecran = ecran
         self.numero = numero
         self.buzzer = False
@@ -25,15 +25,25 @@ class IndicJoueur:
         self.vecteurY = 0
         self.timer = pygame.time.Clock()
         self.listeAvatar = [
-            pygame.image.load("placeholder-avatar1.webp"),
-            pygame.image.load("placeholder-avatar2.webp"),
-            pygame.image.load("placeholder-avatar3.webp"),
-            pygame.image.load("placeholder-avatar4.webp")
+            pygame.image.load("images/lb-avatar1.png"),
+            pygame.image.load("images/lb-avatar2.png"),
+            pygame.image.load("images/lb-avatar3.png"),
+            pygame.image.load("images/lb-avatar4.png"),
+            pygame.image.load("images/lb-avatar5.png"),
+            pygame.image.load("images/lb-avatar6.png"),
+            pygame.image.load("images/lb-avatar7.png"),
+            pygame.image.load("images/lb-avatar8.png"),
+            pygame.image.load("images/lb-avatar9.png"),
+            pygame.image.load("images/lb-avatar10.png"),
+            pygame.image.load("images/lb-avatar11.png")
         ]
-        self.numAvatar = 0
-        self.avatar = self.listeAvatar[self.numero - 1]
+        self.numAvatar = self.numero - 1
+        self.avatarChoisi = avatar
+        self.avatar = self.listeAvatar[avatar]
         self.avatarSuivant = False
         self.avatarPrecedent = False
+        self.score = score
+        self.menu = menu
     
 
     def getNumero(self):
@@ -140,6 +150,10 @@ class IndicJoueur:
         return self.avatar
     
 
+    def getAvatarChoisi(self):
+        return self.avatarChoisi
+    
+
     def getNumAvatar(self):
         return self.numAvatar
     
@@ -177,3 +191,25 @@ class IndicJoueur:
         centreX = self.pos.x - (self.avatar.get_width() // 2)
         centreY = self.pos.y - (self.avatar.get_height() // 2)
         self.ecran.blit(self.avatar, (centreX + avatX, centreY + avatY))
+    
+
+    def getScore(self) -> int:
+        return self.score
+    
+
+    def setScore(self, ajoutScore: int):
+        self.score += ajoutScore
+    
+
+    def majScore(self, scoreX: int = 0, scoreY: int = 0):
+        texteScore = self.police.render("Score : "+str(self.score), True, "white")
+        largeurScore = self.pos.x -(texteScore.get_width() // 2)
+        self.ecran.blit(texteScore, (largeurScore + scoreX, self.pos.y + scoreY))
+    
+
+    def getMenu(self) -> bool:
+        return self.menu
+    
+
+    def setMenu(self, visibleMenu: bool):
+        self.menu = visibleMenu

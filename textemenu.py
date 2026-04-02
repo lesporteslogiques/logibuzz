@@ -19,8 +19,8 @@ class TexteMenu:
         self.texte = texte
     
 
-    def changerVue(self, controleur, combienDeJoueurs: int = 4, numAvatar: int = 0):
-            controleur.setVue(self.vue, controleur, combienDeJoueurs, numAvatar)
+    def changerVue(self, controleur, combienDeJoueurs: list[int] = [], numAvatar: list[int] = [], combienDePoints: list[int] = []):
+            controleur.setVue(self.vue, controleur, combienDeJoueurs, numAvatar, combienDePoints)
     
 
     def majTexte(self):

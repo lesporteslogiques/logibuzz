@@ -20,10 +20,9 @@ class VueVraiOuFaux:
         self.joueur = []
         for j in range(0, self.combienDeJ):
             self.joueur.append(
-                IndicJoueur(vousEtesCombien[j], self.controleur.ecran, (1 / (self.combienDeJ + 1)) + ((1 / (self.combienDeJ + 1)) * j), 0.85)
+                IndicJoueur(vousEtesCombien[j], self.controleur.ecran, (1 / (self.combienDeJ + 1)) + ((1 / (self.combienDeJ + 1)) * j), 0.85), photoDeProfil[j]
             )
             self.joueur[j].setCouleurCercleJoueur()
-            self.joueur[j].setAvatar(photoDeProfil[j])
         self.phrase = ""
         self.bonneReponse = ""
         
@@ -99,7 +98,14 @@ class VueVraiOuFaux:
         touche = pygame.key.get_pressed()
         if touche[pygame.K_ESCAPE]:
             print("Retour au menu")
-            self.controleur.setVue(0, self.controleur)
+            numeroJoueur = []
+            avatarJoueur = []
+            scoreJoueur = []
+            for j in range(0,len(self.joueur)):
+                numeroJoueur.append(self.joueur[j].getNumero())
+                avatarJoueur.append(self.joueur[j].getAvatarChoisi())
+                scoreJoueur.append(self.joueur[j].getScore())
+            self.controleur.setVue(0, self.controleur, numeroJoueur, avatarJoueur, scoreJoueur, True)
 
 
     def vraieReponse(self):
@@ -118,11 +124,12 @@ class VueVraiOuFaux:
         for i in range(0,self.combienDeJ):
             if self.joueur[i].getValeur() == self.bonneReponse :
                 self.joueur[i].setCouleurTexte(pygame.Color("green"))
+                self.joueur[i].setScore(+1)
             else:
                 self.joueur[i].setCouleurTexte(pygame.Color("red"))
         
             self.joueur[i].majTexte(0,40)
-            # Note : MaJ de l'avatar avec la tête de victoire
+            # Note : MaJ de l'avatar avec la tête de victoire (prochaine version)
             self.joueur[i].majAvatar()
         pygame.display.flip()
         self.delaiTemps(1.5)

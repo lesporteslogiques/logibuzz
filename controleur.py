@@ -1,9 +1,8 @@
 #from vuemenu import VueMenu
-from newvuepartie import VuePartie
-from vuecreation import VueCreation
-from vuevraioufaux import VueVraiOuFaux
+from partie import VuePartie
+from vraioufaux import VueVraiOuFaux
 from tracknbuzz import TrackNBuzz
-from newvuemenu import VueMenu
+from menu import VueMenu
 from inertie import Inertie
 import pygame
 
@@ -18,11 +17,11 @@ class Controleur:
     def getVue(self):
         return self.vue
 
-    def setVue(self, nvVue, controleur, nombreJoueurs: int = 4, quelAvatar: int = 0):
+    def setVue(self, nvVue, controleur, nombreJoueurs: list[int] = [], quelAvatar: list[int] = [], quelScore: list[int] = [], partieFinie: bool = False):
         controleur.ecran.fill("black")
         match nvVue:
             case 0:
-                self.vue = VueMenu(controleur)
+                self.vue = VueMenu(controleur, nombreJoueurs, quelAvatar, quelScore, partieFinie)
             case 1:
                 self.vue = VuePartie(controleur, self.questions, nombreJoueurs, quelAvatar)
             case 2:
