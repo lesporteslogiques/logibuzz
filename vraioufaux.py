@@ -20,7 +20,7 @@ class VueVraiOuFaux:
         self.joueur = []
         for j in range(0, self.combienDeJ):
             self.joueur.append(
-                IndicJoueur(vousEtesCombien[j], self.controleur.ecran, (1 / (self.combienDeJ + 1)) + ((1 / (self.combienDeJ + 1)) * j), 0.85), photoDeProfil[j]
+                IndicJoueur(vousEtesCombien[j], self.controleur.ecran, (1 / (self.combienDeJ + 1)) + ((1 / (self.combienDeJ + 1)) * j), 0.85, photoDeProfil[j])
             )
             self.joueur[j].setCouleurCercleJoueur()
         self.phrase = ""
@@ -89,8 +89,7 @@ class VueVraiOuFaux:
                     self.joueur[j].setValeur(False)
                 if self.joueur[j].getValider():
                     self.joueur[j].setTexte("?")
-            self.joueur[j].majTexte(0,40)
-            self.joueur[j].majAvatar()
+            self.joueur[j].majTexte(0,-80)
 
         if aChoisi or self.temps <= 0:
             self.vraieReponse()
@@ -128,7 +127,7 @@ class VueVraiOuFaux:
             else:
                 self.joueur[i].setCouleurTexte(pygame.Color("red"))
         
-            self.joueur[i].majTexte(0,40)
+            self.joueur[i].majTexte(0,-80)
             # Note : MaJ de l'avatar avec la tête de victoire (prochaine version)
             self.joueur[i].majAvatar()
         pygame.display.flip()
@@ -142,6 +141,8 @@ class VueVraiOuFaux:
         self.controleur.ecran.fill("black")
         for j in range(0, self.combienDeJ):
             self.joueur[j].majCercle()
+            self.joueur[j].majAvatar()
+            self.joueur[j].majScore(0,40)
         ligne = []
         taille = len(self.phrase)
         hauteurPhrase = (hauteur * 0.3) - ((taille - 1) * 44)

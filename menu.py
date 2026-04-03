@@ -159,8 +159,8 @@ class VueMenu:
                     self.choix = 0
                         
                 match self.choix:
-                    case 0:
-                        self.controleur.setVue(0, self.controleur)
+                    # case 0:
+                    #     self.controleur.setVue(0, self.controleur)
                     case 1:
                         self.modes[0].changerVue(self.controleur, numero, numeroAvatar)
                     case 2:

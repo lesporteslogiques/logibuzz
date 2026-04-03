@@ -8,7 +8,7 @@ class TrackNBuzz:
         print("Vue Track & Buzz")
         # self.timer = pygame.time.Clock()
         self.temps = 0
-        self.fond = pygame.image.load("images/placeholder-fond.png")
+        self.fond = pygame.image.load("images/lb-trackfondplaceholder.png")
         self.buzzer = pygame.joystick.Joystick(0)
         self.punchline = [
             "Trop rapide pour vous !",

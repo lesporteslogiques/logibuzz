@@ -6,6 +6,7 @@ class VuePartie:
         self.controleur = controleur
         self.questions = questions
         print("Vue Partie, mk2")
+        self.fondPartie = pygame.image.load("images/lb-fondquiz.png")
         self.buzzer = pygame.joystick.Joystick(0)
         self.timer = pygame.time.Clock()
         delai = 1
@@ -164,6 +165,7 @@ class VuePartie:
 
     def bouclePrincipale(self, largeur, hauteur, events):
         self.controleur.ecran.fill("black")
+        self.controleur.ecran.blit(self.fondPartie, (0,0))
         taille = len(self.ligneQuestion)
         self.largeur = largeur
         self.hauteur = hauteur
